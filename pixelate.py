@@ -9,16 +9,24 @@ from wand.image import Image
 def main():
 
 	og = Image(filename ='original.png')
-	new = og.convert('png')
-
-	down_scale = .01;
-
-	new.sample(int(og.width*down_scale), int(og.height*down_scale))
-	new.sample(og.width, og.height)
 	
-	new.save(filename = 'frames/pixelated.png')
+	count = 20;
+	for i in range(1, count):
 
-	print (og.height, og.width)
+		new = og.convert('gif')
+
+		down_scale = i/100;
+
+		print (i, down_scale)
+
+		new.sample(int(og.width*down_scale), int(og.height*down_scale))
+		new.sample(og.width, og.height)
+		
+		new.save(filename = 'frames/pixelated-' + str(i).zfill(2) + '.gif')
+
+	end = og.convert('gif')
+	end.save(filename = 'frames/pixelated-' + str(count).zfill(2) + '.gif')
+	os.system("gifsicle --colors 256 -d 5 frames/*.gif > all.gif")
 
 
 if __name__ == "__main__":
