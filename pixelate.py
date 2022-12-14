@@ -3,12 +3,13 @@
 #!/usr/bin/env python3
 
 import os
+import argparse
 from wand.image import Image
 
 
-def main():
+def pixelate_resolve(image_path):
 
-	og = Image(filename ='original.png')
+	og = Image(filename = image_path)
 	
 	# number of pixelations (.01 scale increments from .01)
 	count = 8;
@@ -41,6 +42,21 @@ def main():
 
 	print(_gif)
 	os.system(_gif)
+
+
+def main():
+
+	parser = argparse.ArgumentParser(description="""
+        from a source image, creates an resolve-from-pixelation animated GIF
+        """)
+    parser.add_argument('img', help='path to source image')
+    args = parser.parse_args()
+    path = os.path.realpath(args.img)
+    try:
+        multiline_mask_by_letter(path)
+    except:
+        print("Couldn't pixelate {}".format(path))
+ 
 
 
 if __name__ == "__main__":
