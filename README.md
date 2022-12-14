@@ -17,6 +17,6 @@ git clone git@github.com:petehawkes/pixelator.git
 ## Usage
 
 ```
-$ python3 pixelate.py
+$ python3 pixelate.py [source-img-path.jpg/png/gif]
 ```
 
