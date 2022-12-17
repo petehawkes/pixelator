@@ -21,10 +21,11 @@ def main():
 	# load iamge
 	og = Image(filename = path)
 
-	print ("\nPixelating " + args.img + "\n")
+	print ("\nPixelating " + args.img + "\n") 
 	
-	# number of pixelations (.01 scale increments from .01)
-	count = 8;
+	# number of pixelations
+	count = 8
+	factor = min(og.height, og.width)*.2 # scale relative to img size
 
 	# clear frames folder
 	os.system("rm frames/*")
@@ -37,7 +38,7 @@ def main():
 
 		new = og.convert('gif')
 
-		down_scale = i/100;
+		down_scale = (i*i)/factor
 		print (i, down_scale)
 
 		# down sample then pop back to full size
